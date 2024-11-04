@@ -38,28 +38,25 @@ char	*ft_strchr(const char *s, int c)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
-	size_t	j;
-	char	*joined_str;
+	size_t	len;
+	char	*str;
 
+	if (!s1 && !s2)
+		return (NULL);
 	if (!s1)
-	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		if (!s1)
-			return (NULL);
-		s1[0] = '\0';
-	}
-	if (!s1 || !s2)
+		s1 = "";
+	if (!s2)
+		s2 = "";
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	str = (char *)malloc(len * sizeof(char));
+	if (!str)
 		return (NULL);
-	joined_str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!joined_str)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		joined_str[i] = s1[i];
-	j = 0;
-	while (s2[j])
-		joined_str[i++] = s2[j++];
-	joined_str[i] = '\0';
-	free(s1);
-	return (joined_str);
+	i = 0;
+	while (*s1)
+		str[i++] = *s1++;
+	while (*s2)
+		str[i++] = *s2++;
+	str[i] = '\0';
+	return (str);
 }
+
