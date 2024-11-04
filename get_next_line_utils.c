@@ -44,6 +44,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		s1 = (char *)malloc(1 * sizeof(char));
+		if (!s1)
+			return (NULL);
 		s1[0] = '\0';
 	}
 	if (!s1 || !s2)

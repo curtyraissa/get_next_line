@@ -43,6 +43,11 @@ char	*read_file(int fd, char *stash)
 			return (free(buffer), free(stash), NULL);
 		buffer[bytes_read] = '\0';
 		stash = ft_strjoin(stash, buffer);
+		if (!stash)
+		{
+			free(buffer);
+			return (NULL);
+		}
 	}
 	free(buffer);
 	return (stash);
