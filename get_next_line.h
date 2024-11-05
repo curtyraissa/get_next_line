@@ -27,5 +27,6 @@ char	*update_stash(char *stash);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

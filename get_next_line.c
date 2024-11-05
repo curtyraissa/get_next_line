@@ -32,7 +32,7 @@ char	*read_file(int fd, char *stash)
 	char	*buffer;
 	ssize_t	bytes_read;
 
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
