@@ -6,7 +6,7 @@
 /*   By: rcurty-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:06:48 by rcurty-g          #+#    #+#             */
-/*   Updated: 2024/11/04 11:05:21 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:05:56 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*update_stash(char *stash);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
-void	*ft_calloc(size_t count, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif

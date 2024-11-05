@@ -6,7 +6,7 @@
 /*   By: rcurty-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:06:32 by rcurty-g          #+#    #+#             */
-/*   Updated: 2024/11/04 11:05:33 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2024/11/05 11:06:16 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,48 +35,78 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*ptr;
-	size_t	total_size;
-	size_t	i;
+	unsigned char	*ptr;
+	size_t			total_size;
+	size_t			i;
 
-	total_size = count * size;
+	total_size = nmemb * size;
+	if (nmemb != 0 && total_size / nmemb != size)
+		return (NULL);
 	ptr = malloc(total_size);
 	if (!ptr)
 		return (NULL);
 	i = 0;
 	while (i < total_size)
-		((unsigned char *)ptr)[i++] = 0;
+	{
+		ptr[i] = 0;
+		i++;
+	}
 	return (ptr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *stash, char *buffer)
 {
 	size_t	i;
-	size_t	len;
 	char	*str;
+	char	*original_stash;
 
-	if (!s1 && !s2)
+	if (!stash && !buffer)
 		return (NULL);
-	if (!s1)
-		s1 = (char *)ft_calloc(1, sizeof(char));
-	if (!s2)
-		s2 = "";
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *)malloc(len * sizeof(char));
-	if (!str)
+	if (!stash)
+		stash = (char *)ft_calloc(1, sizeof(char));
+	original_stash = stash;
+	if (ft_strlen(stash) + ft_strlen(buffer) == 0)
 	{
-		free(s1);
+		free(stash);
 		return (NULL);
 	}
+	str = ft_calloc(ft_strlen(stash) + ft_strlen(buffer) + 1, sizeof(char));
+	if (!str)
+		return (NULL);
 	i = 0;
-	while (*s1)
-		str[i++] = *s1++;
-	while (*s2)
-		str[i++] = *s2++;
+	while (*stash && stash)
+		str[i++] = *stash++;
+	while (*buffer && buffer)
+		str[i++] = *buffer++;
 	str[i] = '\0';
-	free(s1);
+	free(original_stash);
 	return (str);
 }
 
+char	*update_stash(char *stash)
+{
+	int		i;
+	int		j;
+	char	*new_stash;
+
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (!stash[i])
+	{
+		free(stash);
+		return (NULL);
+	}
+	new_stash = malloc((ft_strlen(stash) - i + 1) * sizeof(char));
+	if (!new_stash)
+		return (NULL);
+	i++;
+	j = 0;
+	while (stash[i])
+		new_stash[j++] = stash[i++];
+	new_stash[j] = '\0';
+	free(stash);
+	return (new_stash);
+}
