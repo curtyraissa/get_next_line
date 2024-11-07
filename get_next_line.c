@@ -6,7 +6,7 @@
 /*   By: rcurty-g <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 08:06:13 by rcurty-g          #+#    #+#             */
-/*   Updated: 2024/11/05 11:06:38 by rcurty-g         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:07:18 by rcurty-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,30 @@ char	*extract_line(char *stash)
 		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
+}
+
+char	*update_stash(char *stash)
+{
+	int		i;
+	int		j;
+	char	*new_stash;
+
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (!stash[i])
+	{
+		free(stash);
+		return (NULL);
+	}
+	new_stash = malloc((ft_strlen(stash) - i + 1) * sizeof(char));
+	if (!new_stash)
+		return (NULL);
+	i++;
+	j = 0;
+	while (stash[i])
+		new_stash[j++] = stash[i++];
+	new_stash[j] = '\0';
+	free(stash);
+	return (new_stash);
 }
